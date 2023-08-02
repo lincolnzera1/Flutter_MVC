@@ -8,8 +8,8 @@ class InitialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final APIController _bibleController = Get.put(APIController());
+    final APIController contador = Get.put(APIController());
 
     return Scaffold(
       appBar: AppBar(),
@@ -23,15 +23,26 @@ class InitialPage extends StatelessWidget {
                 try {
                   final randomVerse =
                       await _bibleController.fetchRandomVerse('nvi', 'pv');
-                  print(
-                      _bibleController.verseText.value); // Aqui você pode fazer o que desejar com a resposta da requisição
+                  print(_bibleController.verseText
+                      .value); // Aqui você pode fazer o que desejar com a resposta da requisição
                 } catch (e) {
                   print('Erro: $e');
                 }
               },
               child: Text('Buscar Versículo Aleatório'),
             ),
-            Obx(() => Text("${_bibleController.verseText.value}"))
+            ElevatedButton(
+                onPressed: () {
+                  contador.incrementar();
+                },
+                child: Text("Incrementar")),
+            ElevatedButton(
+                onPressed: () {
+                  contador.decrementar();
+                },
+                child: Text("Decrementar")),
+            Obx(() => Text("${_bibleController.verseText.value}")),
+            Obx(() => Text("${contador.contador}")),
           ],
         ),
       ),

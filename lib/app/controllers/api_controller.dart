@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 class APIController extends GetxController{
 
   RxString verseText = "".obs;
+  RxInt contador = 0.obs;
 
   Future<void> fetchRandomVerse(String version, String abbrev) async {
     String url = 'https://www.abibliadigital.com.br/api/verses/$version/$abbrev/random';
@@ -22,4 +23,8 @@ class APIController extends GetxController{
       throw Exception('Error: $e');
     }
   }
+
+  void incrementar() => contador.value++;
+  void decrementar() => contador.value--;
+
 }
