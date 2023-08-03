@@ -8,8 +8,8 @@ class InitialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final APIController _bibleController = Get.put(APIController());
-    final APIController contador = Get.put(APIController());
+    final BibliaController bibleController = Get.put(BibliaController());
+    var versos = [].obs;
 
     return Scaffold(
       appBar: AppBar(),
@@ -17,34 +17,17 @@ class InitialPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("Initial page"),
+            const Text("Initial page"),
             ElevatedButton(
               onPressed: () async {
-                try {
-                  final randomVerse =
-                      await _bibleController.fetchRandomVerse('nvi', 'pv');
-                  print(_bibleController.verseText
-                      .value); // Aqui você pode fazer o que desejar com a resposta da requisição
-                } catch (e) {
-                  print('Erro: $e');
-                }
+                versos = await bibleController.pegarVersiculos();
+                print("Os versos são: $versos");
               },
-              child: Text('Buscar Versículo Aleatório'),
+              child: const Text('Buscar Versículo Aleatório'),
             ),
-            ElevatedButton(
-                onPressed: () {
-                  contador.incrementar();
-                },
-                child: Text("Incrementar")),
-            ElevatedButton(
-                onPressed: () {
-                  contador.decrementar();
-                },
-                child: Text("Decrementar")),
-            Obx(() => Text("${_bibleController.verseText.value}")),
-            Obx(() => Text("${contador.contador}")),
+            Obx(() => Text("${versos}")),
           ],
-        ),
+        ), 
       ),
     );
   }

@@ -7,7 +7,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final APIController apiController = APIController();
 
     return Scaffold(
       appBar: AppBar(),
