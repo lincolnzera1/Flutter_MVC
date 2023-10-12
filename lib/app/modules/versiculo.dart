@@ -34,23 +34,27 @@ class Versiculo {
 class VersiculosResponse {
   final Biblia biblia;
   final List<String> versiculosEscolhidos;
+  final int capituloEscolhido;
   VersiculosResponse({
     required this.biblia,
     required this.versiculosEscolhidos,
+    required this.capituloEscolhido,
   });
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'biblia': biblia.toMap(),
-      'versiculos': versiculosEscolhidos,
+      'versiculosEscolhidos': versiculosEscolhidos,
+      'capituloEscolhido': capituloEscolhido,
     };
   }
 
   factory VersiculosResponse.fromMap(Map<String, dynamic> map) {
     return VersiculosResponse(
         biblia: Biblia.fromMap(map['biblia'] as Map<String, dynamic>),
+        capituloEscolhido: map['capituloEscolhido'] as int,
         versiculosEscolhidos: List<String>.from(
-          (map['versiculos'] as List<String>),
+          (map['versiculosEscolhidos'] as List<String>),
         ));
   }
 

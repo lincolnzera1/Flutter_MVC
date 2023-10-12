@@ -72,7 +72,10 @@ class BibliaController {
       Biblia biblia = Biblia.fromMap(result);
 
       return VersiculosResponse(
-          biblia: biblia, versiculosEscolhidos: listaDeVersiculosPraMostrar);
+          biblia: biblia, 
+          versiculosEscolhidos: listaDeVersiculosPraMostrar,
+          capituloEscolhido: capituloSorteado
+          );
     } catch (e) {
       throw Exception("Não foi possível pegar os dados: $e");
     }
